@@ -1,5 +1,9 @@
 <template>
   <div>
+    <b-dropdown-item to="/elevator-pitch">
+      <font-awesome-icon icon="asterisk" />
+      <span>Elevator Pitch</span>
+    </b-dropdown-item>
     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
   </div>
 </template>

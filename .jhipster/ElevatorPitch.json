@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20221104212506",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "elevator_pitch",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thumbnailUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "likeNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "liked",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inventor",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ElevatorPitch",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

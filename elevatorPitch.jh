@@ -1,0 +1,14 @@
+entity ElevatorPitch {
+	title String,
+    description String,
+    videoUrl String,
+    thumbnailUrl String,
+    likeNumber Integer,
+    liked Boolean,
+    inventor Long
+}
+
+// Set pagination options
+paginate ElevatorPitch with infinite-scroll
+
+service all with serviceImpl

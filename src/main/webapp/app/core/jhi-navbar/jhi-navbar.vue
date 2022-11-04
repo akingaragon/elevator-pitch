@@ -2,7 +2,7 @@
   <b-navbar data-cy="navbar" toggleable="md" type="dark" class="jh-navbar">
     <b-navbar-brand class="logo" b-link to="/">
       <span class="logo-img"></span>
-      <span class="navbar-title">ElevatorPitch</span> <span class="navbar-version">{{ version }}</span>
+      <span class="navbar-title">ElevatorPitch</span>
     </b-navbar-brand>
     <b-navbar-toggle
       right
