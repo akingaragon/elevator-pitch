@@ -3,6 +3,8 @@ package com.junction.idea.service.impl;
 import com.junction.idea.domain.ElevatorPitch;
 import com.junction.idea.repository.ElevatorPitchRepository;
 import com.junction.idea.service.ElevatorPitchService;
+import com.junction.idea.service.dto.ElevatorPitchDTO;
+import com.junction.idea.service.mapper.ElevatorPitchMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,68 +24,56 @@ public class ElevatorPitchServiceImpl implements ElevatorPitchService {
 
     private final ElevatorPitchRepository elevatorPitchRepository;
 
-    public ElevatorPitchServiceImpl(ElevatorPitchRepository elevatorPitchRepository) {
+    private final ElevatorPitchMapper elevatorPitchMapper;
+
+    public ElevatorPitchServiceImpl(ElevatorPitchRepository elevatorPitchRepository, ElevatorPitchMapper elevatorPitchMapper) {
         this.elevatorPitchRepository = elevatorPitchRepository;
+        this.elevatorPitchMapper = elevatorPitchMapper;
     }
 
     @Override
-    public ElevatorPitch save(ElevatorPitch elevatorPitch) {
-        log.debug("Request to save ElevatorPitch : {}", elevatorPitch);
-        return elevatorPitchRepository.save(elevatorPitch);
+    public ElevatorPitchDTO save(ElevatorPitchDTO elevatorPitchDTO) {
+        log.debug("Request to save ElevatorPitch : {}", elevatorPitchDTO);
+        ElevatorPitch elevatorPitch = elevatorPitchMapper.toEntity(elevatorPitchDTO);
+        elevatorPitch = elevatorPitchRepository.save(elevatorPitch);
+        return elevatorPitchMapper.toDto(elevatorPitch);
     }
 
     @Override
-    public ElevatorPitch update(ElevatorPitch elevatorPitch) {
-        log.debug("Request to update ElevatorPitch : {}", elevatorPitch);
-        return elevatorPitchRepository.save(elevatorPitch);
+    public ElevatorPitchDTO update(ElevatorPitchDTO elevatorPitchDTO) {
+        log.debug("Request to update ElevatorPitch : {}", elevatorPitchDTO);
+        ElevatorPitch elevatorPitch = elevatorPitchMapper.toEntity(elevatorPitchDTO);
+        elevatorPitch = elevatorPitchRepository.save(elevatorPitch);
+        return elevatorPitchMapper.toDto(elevatorPitch);
     }
 
     @Override
-    public Optional<ElevatorPitch> partialUpdate(ElevatorPitch elevatorPitch) {
-        log.debug("Request to partially update ElevatorPitch : {}", elevatorPitch);
+    public Optional<ElevatorPitchDTO> partialUpdate(ElevatorPitchDTO elevatorPitchDTO) {
+        log.debug("Request to partially update ElevatorPitch : {}", elevatorPitchDTO);
 
         return elevatorPitchRepository
-            .findById(elevatorPitch.getId())
+            .findById(elevatorPitchDTO.getId())
             .map(existingElevatorPitch -> {
-                if (elevatorPitch.getTitle() != null) {
-                    existingElevatorPitch.setTitle(elevatorPitch.getTitle());
-                }
-                if (elevatorPitch.getDescription() != null) {
-                    existingElevatorPitch.setDescription(elevatorPitch.getDescription());
-                }
-                if (elevatorPitch.getVideoUrl() != null) {
-                    existingElevatorPitch.setVideoUrl(elevatorPitch.getVideoUrl());
-                }
-                if (elevatorPitch.getThumbnailUrl() != null) {
-                    existingElevatorPitch.setThumbnailUrl(elevatorPitch.getThumbnailUrl());
-                }
-                if (elevatorPitch.getLikeNumber() != null) {
-                    existingElevatorPitch.setLikeNumber(elevatorPitch.getLikeNumber());
-                }
-                if (elevatorPitch.getLiked() != null) {
-                    existingElevatorPitch.setLiked(elevatorPitch.getLiked());
-                }
-                if (elevatorPitch.getInventor() != null) {
-                    existingElevatorPitch.setInventor(elevatorPitch.getInventor());
-                }
+                elevatorPitchMapper.partialUpdate(existingElevatorPitch, elevatorPitchDTO);
 
                 return existingElevatorPitch;
             })
-            .map(elevatorPitchRepository::save);
+            .map(elevatorPitchRepository::save)
+            .map(elevatorPitchMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ElevatorPitch> findAll(Pageable pageable) {
+    public Page<ElevatorPitchDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ElevatorPitches");
-        return elevatorPitchRepository.findAll(pageable);
+        return elevatorPitchRepository.findAll(pageable).map(elevatorPitchMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ElevatorPitch> findOne(Long id) {
+    public Optional<ElevatorPitchDTO> findOne(Long id) {
         log.debug("Request to get ElevatorPitch : {}", id);
-        return elevatorPitchRepository.findById(id);
+        return elevatorPitchRepository.findById(id).map(elevatorPitchMapper::toDto);
     }
 
     @Override

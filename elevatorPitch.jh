@@ -12,3 +12,5 @@ entity ElevatorPitch {
 paginate ElevatorPitch with infinite-scroll
 
 service all with serviceImpl
+
+dto * with mapstruct

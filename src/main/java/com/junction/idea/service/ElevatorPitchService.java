@@ -1,37 +1,37 @@
 package com.junction.idea.service;
 
-import com.junction.idea.domain.ElevatorPitch;
+import com.junction.idea.service.dto.ElevatorPitchDTO;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing {@link ElevatorPitch}.
+ * Service Interface for managing {@link com.junction.idea.domain.ElevatorPitch}.
  */
 public interface ElevatorPitchService {
     /**
      * Save a elevatorPitch.
      *
-     * @param elevatorPitch the entity to save.
+     * @param elevatorPitchDTO the entity to save.
      * @return the persisted entity.
      */
-    ElevatorPitch save(ElevatorPitch elevatorPitch);
+    ElevatorPitchDTO save(ElevatorPitchDTO elevatorPitchDTO);
 
     /**
      * Updates a elevatorPitch.
      *
-     * @param elevatorPitch the entity to update.
+     * @param elevatorPitchDTO the entity to update.
      * @return the persisted entity.
      */
-    ElevatorPitch update(ElevatorPitch elevatorPitch);
+    ElevatorPitchDTO update(ElevatorPitchDTO elevatorPitchDTO);
 
     /**
      * Partially updates a elevatorPitch.
      *
-     * @param elevatorPitch the entity to update partially.
+     * @param elevatorPitchDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<ElevatorPitch> partialUpdate(ElevatorPitch elevatorPitch);
+    Optional<ElevatorPitchDTO> partialUpdate(ElevatorPitchDTO elevatorPitchDTO);
 
     /**
      * Get all the elevatorPitches.
@@ -39,7 +39,7 @@ public interface ElevatorPitchService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<ElevatorPitch> findAll(Pageable pageable);
+    Page<ElevatorPitchDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" elevatorPitch.
@@ -47,7 +47,7 @@ public interface ElevatorPitchService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<ElevatorPitch> findOne(Long id);
+    Optional<ElevatorPitchDTO> findOne(Long id);
 
     /**
      * Delete the "id" elevatorPitch.

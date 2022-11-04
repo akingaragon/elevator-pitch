@@ -1,7 +1,7 @@
 {
   "applications": "*",
   "changelogDate": "20221104212506",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "elevator_pitch",
   "fields": [

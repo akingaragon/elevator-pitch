@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.junction.idea.IntegrationTest;
 import com.junction.idea.domain.ElevatorPitch;
 import com.junction.idea.repository.ElevatorPitchRepository;
+import com.junction.idea.service.dto.ElevatorPitchDTO;
+import com.junction.idea.service.mapper.ElevatorPitchMapper;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -58,6 +60,9 @@ class ElevatorPitchResourceIT {
 
     @Autowired
     private ElevatorPitchRepository elevatorPitchRepository;
+
+    @Autowired
+    private ElevatorPitchMapper elevatorPitchMapper;
 
     @Autowired
     private EntityManager em;
@@ -113,8 +118,11 @@ class ElevatorPitchResourceIT {
     void createElevatorPitch() throws Exception {
         int databaseSizeBeforeCreate = elevatorPitchRepository.findAll().size();
         // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
         restElevatorPitchMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitch)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the ElevatorPitch in the database
@@ -135,12 +143,15 @@ class ElevatorPitchResourceIT {
     void createElevatorPitchWithExistingId() throws Exception {
         // Create the ElevatorPitch with an existing ID
         elevatorPitch.setId(1L);
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
 
         int databaseSizeBeforeCreate = elevatorPitchRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restElevatorPitchMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitch)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the ElevatorPitch in the database
@@ -217,12 +228,13 @@ class ElevatorPitchResourceIT {
             .likeNumber(UPDATED_LIKE_NUMBER)
             .liked(UPDATED_LIKED)
             .inventor(UPDATED_INVENTOR);
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(updatedElevatorPitch);
 
         restElevatorPitchMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedElevatorPitch.getId())
+                put(ENTITY_API_URL_ID, elevatorPitchDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedElevatorPitch))
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isOk());
 
@@ -245,12 +257,15 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, elevatorPitch.getId())
+                put(ENTITY_API_URL_ID, elevatorPitchDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitch))
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -265,12 +280,15 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitch))
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -285,9 +303,14 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitch)))
+            .perform(
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ElevatorPitch in the database
@@ -382,12 +405,15 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, elevatorPitch.getId())
+                patch(ENTITY_API_URL_ID, elevatorPitchDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitch))
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -402,12 +428,15 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitch))
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -422,10 +451,15 @@ class ElevatorPitchResourceIT {
         int databaseSizeBeforeUpdate = elevatorPitchRepository.findAll().size();
         elevatorPitch.setId(count.incrementAndGet());
 
+        // Create the ElevatorPitch
+        ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(elevatorPitch);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restElevatorPitchMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(elevatorPitch))
+                patch(ENTITY_API_URL)
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(elevatorPitchDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 
