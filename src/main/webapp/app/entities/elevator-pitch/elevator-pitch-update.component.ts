@@ -73,7 +73,7 @@ export default class ElevatorPitchUpdate extends Vue {
         .then(param => {
           this.isSaving = false;
           this.$router.go(-1);
-          const message = 'A ElevatorPitch is created with identifier ' + param.id;
+          const message = 'Your ElevatorPitch is created successfully! Your application ID is ' + param.id;
           (this.$root as any).$bvToast.toast(message.toString(), {
             toaster: 'b-toaster-top-center',
             title: 'Success',

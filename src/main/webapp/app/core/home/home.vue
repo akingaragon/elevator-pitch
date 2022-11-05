@@ -11,15 +11,7 @@
         <div class="alert alert-success">
           <span v-if="username">You are logged in as user "{{ username }}"</span>
         </div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="jhi-confirm-delete-elevatorPitch"
-          data-cy="entityConfirmDeleteButton"
-          v-on:click="removeElevatorPitch()"
-        >
-          Create Pitch
-        </button>
+        <router-link to="/elevator-pitch/new" tag="button" class="btn btn-primary">Create Pitch</router-link>
       </div>
       <div class="alert alert-warning" v-if="!authenticated">
         <span>You don't have an account yet?</span>&nbsp;

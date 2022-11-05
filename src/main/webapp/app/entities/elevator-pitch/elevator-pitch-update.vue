@@ -3,7 +3,7 @@
     <div class="col-8">
       <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
         <h2 id="elevatorPitchApp.elevatorPitch.home.createOrEditLabel" data-cy="ElevatorPitchCreateUpdateHeading">
-          Create or edit a ElevatorPitch
+          Submit Your Elevator Pitch
         </h2>
         <div>
           <div class="form-group" v-if="elevatorPitch.id">
@@ -58,47 +58,8 @@
               v-model="$v.elevatorPitch.thumbnailUrl.$model"
             />
           </div>
-          <div class="form-group">
-            <label class="form-control-label" for="elevator-pitch-likeNumber">Like Number</label>
-            <input
-              type="number"
-              class="form-control"
-              name="likeNumber"
-              id="elevator-pitch-likeNumber"
-              data-cy="likeNumber"
-              :class="{ valid: !$v.elevatorPitch.likeNumber.$invalid, invalid: $v.elevatorPitch.likeNumber.$invalid }"
-              v-model.number="$v.elevatorPitch.likeNumber.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" for="elevator-pitch-liked">Liked</label>
-            <input
-              type="checkbox"
-              class="form-check"
-              name="liked"
-              id="elevator-pitch-liked"
-              data-cy="liked"
-              :class="{ valid: !$v.elevatorPitch.liked.$invalid, invalid: $v.elevatorPitch.liked.$invalid }"
-              v-model="$v.elevatorPitch.liked.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" for="elevator-pitch-inventor">Inventor</label>
-            <input
-              type="number"
-              class="form-control"
-              name="inventor"
-              id="elevator-pitch-inventor"
-              data-cy="inventor"
-              :class="{ valid: !$v.elevatorPitch.inventor.$invalid, invalid: $v.elevatorPitch.inventor.$invalid }"
-              v-model.number="$v.elevatorPitch.inventor.$model"
-            />
-          </div>
         </div>
         <div>
-          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">
-            <font-awesome-icon icon="ban"></font-awesome-icon>&nbsp;<span>Cancel</span>
-          </button>
           <button
             type="submit"
             id="save-entity"
@@ -106,7 +67,7 @@
             :disabled="$v.elevatorPitch.$invalid || isSaving"
             class="btn btn-primary"
           >
-            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span>Save</span>
+            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span>Submit Application</span>
           </button>
         </div>
       </form>

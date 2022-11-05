@@ -25,7 +25,7 @@ export default {
       path: 'elevator-pitch/new',
       name: 'ElevatorPitchCreate',
       component: ElevatorPitchUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.USER, Authority.INVENTOR] },
     },
     {
       path: 'elevator-pitch/:elevatorPitchId/edit',
