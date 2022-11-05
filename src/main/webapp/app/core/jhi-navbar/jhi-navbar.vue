@@ -2,7 +2,7 @@
   <b-navbar data-cy="navbar" toggleable="md" type="dark" class="jh-navbar">
     <b-navbar-brand class="logo" b-link to="/">
       <span class="logo-img"></span>
-      <span class="navbar-title">ElevatorPitch</span>
+      <span class="navbar-title"></span>
     </b-navbar-brand>
     <b-navbar-toggle
       right
@@ -34,7 +34,7 @@
         >
           <span slot="button-content" class="navbar-dropdown-menu">
             <font-awesome-icon icon="th-list" />
-            <span class="no-bold">Entities</span>
+            <span class="no-bold">Applications</span>
           </span>
           <entities-menu></entities-menu>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
@@ -212,10 +212,10 @@
 }
 
 .logo .logo-img {
-  height: 45px;
+  height: 70px;
   display: inline-block;
   vertical-align: middle;
-  width: 70px;
+  width: 210px;
 }
 
 .logo-img {
