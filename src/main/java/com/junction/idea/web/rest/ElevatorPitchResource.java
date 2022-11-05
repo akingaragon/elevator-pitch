@@ -208,7 +208,7 @@ public class ElevatorPitchResource {
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, elevatorPitchDTO.getId().toString()))
-            .body(result);
+            .build();
     }
 
     @PutMapping("/elevator-pitches/{id}/unlike")
@@ -226,6 +226,6 @@ public class ElevatorPitchResource {
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, elevatorPitchDTO.getId().toString()))
-            .body(result);
+            .build();
     }
 }
