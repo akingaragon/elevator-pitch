@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "get",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Get",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7209fdb015686fd90918b2037cb2039206405bd3"
+      }
+    },
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "32a99b537d1c6f3529a08257c28a5feb70c0c5af"
+      }
+    },
+    {
+      "identity" : "videoplayer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nerdsupremacist/VideoPlayer",
+      "state" : {
+        "branch" : "master",
+        "revision" : "893d6f5e504897850a5ff4d780a9b40a9ee76022"
+      }
+    }
+  ],
+  "version" : 2
+}
