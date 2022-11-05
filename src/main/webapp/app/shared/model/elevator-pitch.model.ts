@@ -1,3 +1,5 @@
+import { IUser } from '@/shared/model/user.model';
+
 export interface IElevatorPitch {
   id?: number;
   title?: string | null;
@@ -6,7 +8,7 @@ export interface IElevatorPitch {
   thumbnailUrl?: string | null;
   likeNumber?: number | null;
   liked?: boolean | null;
-  inventor?: number | null;
+  inventor?: IUser | null;
 }
 
 export class ElevatorPitch implements IElevatorPitch {
@@ -18,7 +20,7 @@ export class ElevatorPitch implements IElevatorPitch {
     public thumbnailUrl?: string | null,
     public likeNumber?: number | null,
     public liked?: boolean | null,
-    public inventor?: number | null
+    public inventor?: IUser | null
   ) {
     this.liked = this.liked ?? false;
   }

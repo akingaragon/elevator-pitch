@@ -23,7 +23,7 @@ public class ElevatorPitchDTO implements Serializable {
 
     private Boolean liked;
 
-    private Long inventor;
+    private UserDTO inventor;
 
     public Long getId() {
         return id;
@@ -81,11 +81,11 @@ public class ElevatorPitchDTO implements Serializable {
         this.liked = liked;
     }
 
-    public Long getInventor() {
+    public UserDTO getInventor() {
         return inventor;
     }
 
-    public void setInventor(Long inventor) {
+    public void setInventor(UserDTO inventor) {
         this.inventor = inventor;
     }
 

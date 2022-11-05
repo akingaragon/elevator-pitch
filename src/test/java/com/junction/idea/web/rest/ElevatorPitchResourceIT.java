@@ -49,9 +49,6 @@ class ElevatorPitchResourceIT {
     private static final Boolean DEFAULT_LIKED = false;
     private static final Boolean UPDATED_LIKED = true;
 
-    private static final Long DEFAULT_INVENTOR = 1L;
-    private static final Long UPDATED_INVENTOR = 2L;
-
     private static final String ENTITY_API_URL = "/api/elevator-pitches";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -85,8 +82,7 @@ class ElevatorPitchResourceIT {
             .videoUrl(DEFAULT_VIDEO_URL)
             .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
             .likeNumber(DEFAULT_LIKE_NUMBER)
-            .liked(DEFAULT_LIKED)
-            .inventor(DEFAULT_INVENTOR);
+            .liked(DEFAULT_LIKED);
         return elevatorPitch;
     }
 
@@ -103,8 +99,7 @@ class ElevatorPitchResourceIT {
             .videoUrl(UPDATED_VIDEO_URL)
             .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .likeNumber(UPDATED_LIKE_NUMBER)
-            .liked(UPDATED_LIKED)
-            .inventor(UPDATED_INVENTOR);
+            .liked(UPDATED_LIKED);
         return elevatorPitch;
     }
 
@@ -135,7 +130,6 @@ class ElevatorPitchResourceIT {
         assertThat(testElevatorPitch.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
         assertThat(testElevatorPitch.getLikeNumber()).isEqualTo(DEFAULT_LIKE_NUMBER);
         assertThat(testElevatorPitch.getLiked()).isEqualTo(DEFAULT_LIKED);
-        assertThat(testElevatorPitch.getInventor()).isEqualTo(DEFAULT_INVENTOR);
     }
 
     @Test
@@ -176,8 +170,7 @@ class ElevatorPitchResourceIT {
             .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL)))
             .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].likeNumber").value(hasItem(DEFAULT_LIKE_NUMBER)))
-            .andExpect(jsonPath("$.[*].liked").value(hasItem(DEFAULT_LIKED.booleanValue())))
-            .andExpect(jsonPath("$.[*].inventor").value(hasItem(DEFAULT_INVENTOR.intValue())));
+            .andExpect(jsonPath("$.[*].liked").value(hasItem(DEFAULT_LIKED.booleanValue())));
     }
 
     @Test
@@ -197,8 +190,7 @@ class ElevatorPitchResourceIT {
             .andExpect(jsonPath("$.videoUrl").value(DEFAULT_VIDEO_URL))
             .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL))
             .andExpect(jsonPath("$.likeNumber").value(DEFAULT_LIKE_NUMBER))
-            .andExpect(jsonPath("$.liked").value(DEFAULT_LIKED.booleanValue()))
-            .andExpect(jsonPath("$.inventor").value(DEFAULT_INVENTOR.intValue()));
+            .andExpect(jsonPath("$.liked").value(DEFAULT_LIKED.booleanValue()));
     }
 
     @Test
@@ -226,8 +218,7 @@ class ElevatorPitchResourceIT {
             .videoUrl(UPDATED_VIDEO_URL)
             .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .likeNumber(UPDATED_LIKE_NUMBER)
-            .liked(UPDATED_LIKED)
-            .inventor(UPDATED_INVENTOR);
+            .liked(UPDATED_LIKED);
         ElevatorPitchDTO elevatorPitchDTO = elevatorPitchMapper.toDto(updatedElevatorPitch);
 
         restElevatorPitchMockMvc
@@ -248,7 +239,6 @@ class ElevatorPitchResourceIT {
         assertThat(testElevatorPitch.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
         assertThat(testElevatorPitch.getLikeNumber()).isEqualTo(UPDATED_LIKE_NUMBER);
         assertThat(testElevatorPitch.getLiked()).isEqualTo(UPDATED_LIKED);
-        assertThat(testElevatorPitch.getInventor()).isEqualTo(UPDATED_INVENTOR);
     }
 
     @Test
@@ -330,11 +320,7 @@ class ElevatorPitchResourceIT {
         ElevatorPitch partialUpdatedElevatorPitch = new ElevatorPitch();
         partialUpdatedElevatorPitch.setId(elevatorPitch.getId());
 
-        partialUpdatedElevatorPitch
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
-            .videoUrl(UPDATED_VIDEO_URL)
-            .inventor(UPDATED_INVENTOR);
+        partialUpdatedElevatorPitch.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).videoUrl(UPDATED_VIDEO_URL);
 
         restElevatorPitchMockMvc
             .perform(
@@ -354,7 +340,6 @@ class ElevatorPitchResourceIT {
         assertThat(testElevatorPitch.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
         assertThat(testElevatorPitch.getLikeNumber()).isEqualTo(DEFAULT_LIKE_NUMBER);
         assertThat(testElevatorPitch.getLiked()).isEqualTo(DEFAULT_LIKED);
-        assertThat(testElevatorPitch.getInventor()).isEqualTo(UPDATED_INVENTOR);
     }
 
     @Test
@@ -375,8 +360,7 @@ class ElevatorPitchResourceIT {
             .videoUrl(UPDATED_VIDEO_URL)
             .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .likeNumber(UPDATED_LIKE_NUMBER)
-            .liked(UPDATED_LIKED)
-            .inventor(UPDATED_INVENTOR);
+            .liked(UPDATED_LIKED);
 
         restElevatorPitchMockMvc
             .perform(
@@ -396,7 +380,6 @@ class ElevatorPitchResourceIT {
         assertThat(testElevatorPitch.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
         assertThat(testElevatorPitch.getLikeNumber()).isEqualTo(UPDATED_LIKE_NUMBER);
         assertThat(testElevatorPitch.getLiked()).isEqualTo(UPDATED_LIKED);
-        assertThat(testElevatorPitch.getInventor()).isEqualTo(UPDATED_INVENTOR);
     }
 
     @Test

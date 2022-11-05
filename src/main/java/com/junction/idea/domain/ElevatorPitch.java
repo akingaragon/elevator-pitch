@@ -36,8 +36,8 @@ public class ElevatorPitch implements Serializable {
     @Column(name = "liked")
     private Boolean liked;
 
-    @Column(name = "inventor")
-    private Long inventor;
+    @ManyToOne
+    private User inventor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -132,17 +132,17 @@ public class ElevatorPitch implements Serializable {
         this.liked = liked;
     }
 
-    public Long getInventor() {
+    public User getInventor() {
         return this.inventor;
     }
 
-    public ElevatorPitch inventor(Long inventor) {
-        this.setInventor(inventor);
-        return this;
+    public void setInventor(User user) {
+        this.inventor = user;
     }
 
-    public void setInventor(Long inventor) {
-        this.inventor = inventor;
+    public ElevatorPitch inventor(User user) {
+        this.setInventor(user);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -175,7 +175,6 @@ public class ElevatorPitch implements Serializable {
             ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", likeNumber=" + getLikeNumber() +
             ", liked='" + getLiked() + "'" +
-            ", inventor=" + getInventor() +
             "}";
     }
 }

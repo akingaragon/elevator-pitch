@@ -1,8 +1,11 @@
 package com.junction.idea.web.rest;
 
+import com.junction.idea.domain.User;
 import com.junction.idea.repository.ElevatorPitchRepository;
 import com.junction.idea.service.ElevatorPitchService;
+import com.junction.idea.service.UserService;
 import com.junction.idea.service.dto.ElevatorPitchDTO;
+import com.junction.idea.service.mapper.UserMapper;
 import com.junction.idea.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,10 +43,19 @@ public class ElevatorPitchResource {
     private final ElevatorPitchService elevatorPitchService;
 
     private final ElevatorPitchRepository elevatorPitchRepository;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
-    public ElevatorPitchResource(ElevatorPitchService elevatorPitchService, ElevatorPitchRepository elevatorPitchRepository) {
+    public ElevatorPitchResource(
+        ElevatorPitchService elevatorPitchService,
+        ElevatorPitchRepository elevatorPitchRepository,
+        UserService userService,
+        UserMapper userMapper
+    ) {
         this.elevatorPitchService = elevatorPitchService;
         this.elevatorPitchRepository = elevatorPitchRepository;
+        this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -59,6 +71,9 @@ public class ElevatorPitchResource {
         if (elevatorPitchDTO.getId() != null) {
             throw new BadRequestAlertException("A new elevatorPitch cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        Optional<User> userWithAuthorities = userService.getUserWithAuthorities();
+        elevatorPitchDTO.setInventor(userMapper.userToUserDTO(userWithAuthorities.get()));
+        elevatorPitchDTO.setLikeNumber(0);
         ElevatorPitchDTO result = elevatorPitchService.save(elevatorPitchDTO);
         return ResponseEntity
             .created(new URI("/api/elevator-pitches/" + result.getId()))

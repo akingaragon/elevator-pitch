@@ -28,10 +28,6 @@
     {
       "fieldName": "liked",
       "fieldType": "Boolean"
-    },
-    {
-      "fieldName": "inventor",
-      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,
@@ -39,6 +35,12 @@
   "name": "ElevatorPitch",
   "pagination": "infinite-scroll",
   "readOnly": false,
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "inventor",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "service": "serviceImpl"
 }

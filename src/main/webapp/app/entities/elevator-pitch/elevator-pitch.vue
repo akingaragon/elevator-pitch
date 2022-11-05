@@ -50,14 +50,6 @@
               <span>Like Number</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'likeNumber'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('liked')">
-              <span>Liked</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'liked'"></jhi-sort-indicator>
-            </th>
-            <th scope="row" v-on:click="changeOrder('inventor')">
-              <span>Inventor</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'inventor'"></jhi-sort-indicator>
-            </th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -73,8 +65,6 @@
             <td>{{ elevatorPitch.videoUrl }}</td>
             <td>{{ elevatorPitch.thumbnailUrl }}</td>
             <td>{{ elevatorPitch.likeNumber }}</td>
-            <td>{{ elevatorPitch.liked }}</td>
-            <td>{{ elevatorPitch.inventor }}</td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link

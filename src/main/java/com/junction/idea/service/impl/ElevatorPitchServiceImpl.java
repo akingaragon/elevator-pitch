@@ -2,6 +2,7 @@ package com.junction.idea.service.impl;
 
 import com.junction.idea.domain.ElevatorPitch;
 import com.junction.idea.repository.ElevatorPitchRepository;
+import com.junction.idea.repository.UserRepository;
 import com.junction.idea.service.ElevatorPitchService;
 import com.junction.idea.service.dto.ElevatorPitchDTO;
 import com.junction.idea.service.mapper.ElevatorPitchMapper;

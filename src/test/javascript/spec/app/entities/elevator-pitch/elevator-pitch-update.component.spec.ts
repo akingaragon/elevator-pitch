@@ -9,6 +9,7 @@ import ElevatorPitchUpdateComponent from '@/entities/elevator-pitch/elevator-pit
 import ElevatorPitchClass from '@/entities/elevator-pitch/elevator-pitch-update.component';
 import ElevatorPitchService from '@/entities/elevator-pitch/elevator-pitch.service';
 
+import UserService from '@/entities/user/user.service';
 import AlertService from '@/shared/alert/alert.service';
 
 const localVue = createLocalVue();
@@ -40,6 +41,8 @@ describe('Component Tests', () => {
         provide: {
           elevatorPitchService: () => elevatorPitchServiceStub,
           alertService: () => new AlertService(),
+
+          userService: () => new UserService(),
         },
       });
       comp = wrapper.vm;

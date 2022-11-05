@@ -2,6 +2,8 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import AlertService from '@/shared/alert/alert.service';
 
+import UserService from '@/entities/user/user.service';
+
 import { IElevatorPitch, ElevatorPitch } from '@/shared/model/elevator-pitch.model';
 import ElevatorPitchService from './elevator-pitch.service';
 
@@ -13,7 +15,6 @@ const validations: any = {
     thumbnailUrl: {},
     likeNumber: {},
     liked: {},
-    inventor: {},
   },
 };
 
@@ -25,6 +26,10 @@ export default class ElevatorPitchUpdate extends Vue {
   @Inject('alertService') private alertService: () => AlertService;
 
   public elevatorPitch: IElevatorPitch = new ElevatorPitch();
+
+  @Inject('userService') private userService: () => UserService;
+
+  public users: Array<any> = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -33,6 +38,7 @@ export default class ElevatorPitchUpdate extends Vue {
       if (to.params.elevatorPitchId) {
         vm.retrieveElevatorPitch(to.params.elevatorPitchId);
       }
+      vm.initRelationships();
     });
   }
 
@@ -104,5 +110,11 @@ export default class ElevatorPitchUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {}
+  public initRelationships(): void {
+    this.userService()
+      .retrieve()
+      .then(res => {
+        this.users = res.data;
+      });
+  }
 }

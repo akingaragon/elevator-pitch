@@ -4,8 +4,11 @@ entity ElevatorPitch {
     videoUrl String,
     thumbnailUrl String,
     likeNumber Integer,
-    liked Boolean,
-    inventor Long
+    liked Boolean
+}
+
+relationship ManyToOne {
+    ElevatorPitch{inventor} to User
 }
 
 // Set pagination options

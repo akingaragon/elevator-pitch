@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new ElevatorPitchService();
-      elemDefault = new ElevatorPitch(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, false, 0);
+      elemDefault = new ElevatorPitch(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, false);
     });
 
     describe('Service methods', () => {
@@ -87,7 +87,6 @@ describe('Service Tests', () => {
             thumbnailUrl: 'BBBBBB',
             likeNumber: 1,
             liked: true,
-            inventor: 1,
           },
           elemDefault
         );
@@ -119,7 +118,6 @@ describe('Service Tests', () => {
             videoUrl: 'BBBBBB',
             thumbnailUrl: 'BBBBBB',
             likeNumber: 1,
-            inventor: 1,
           },
           new ElevatorPitch()
         );
@@ -153,7 +151,6 @@ describe('Service Tests', () => {
             thumbnailUrl: 'BBBBBB',
             likeNumber: 1,
             liked: true,
-            inventor: 1,
           },
           elemDefault
         );

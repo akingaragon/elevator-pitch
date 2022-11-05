@@ -12,6 +12,7 @@
           <span v-if="username">You are logged in as user "{{ username }}"</span>
         </div>
         <router-link to="/elevator-pitch/new" tag="button" class="btn btn-primary">Create Pitch</router-link>
+        <router-link to="/elevator-pitch" tag="button" class="btn btn-primary">See My Pitches</router-link>
       </div>
       <div class="alert alert-warning" v-if="!authenticated">
         <span>You don't have an account yet?</span>&nbsp;

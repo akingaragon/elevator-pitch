@@ -34,17 +34,12 @@
           <dd>
             <span>{{ elevatorPitch.likeNumber }}</span>
           </dd>
-          <dt>
-            <span>Liked</span>
-          </dt>
-          <dd>
-            <span>{{ elevatorPitch.liked }}</span>
-          </dd>
+
           <dt>
             <span>Inventor</span>
           </dt>
           <dd>
-            <span>{{ elevatorPitch.inventor }}</span>
+            {{ elevatorPitch.inventor ? elevatorPitch.inventor.id : '' }}
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
