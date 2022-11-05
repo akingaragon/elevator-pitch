@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -192,5 +191,41 @@ public class ElevatorPitchResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PutMapping("/elevator-pitches/{id}/like")
+    public ResponseEntity<Optional<ElevatorPitchDTO>> likeElevatorPitch(@PathVariable(value = "id", required = false) final Long id) {
+        log.debug("REST request to like ElevatorPitch : {}", id);
+
+        if (!elevatorPitchRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<ElevatorPitchDTO> result = elevatorPitchService.findOne(id);
+        ElevatorPitchDTO elevatorPitchDTO = result.get();
+        elevatorPitchDTO.setLikeNumber(elevatorPitchDTO.getLikeNumber() + 1);
+        elevatorPitchService.update(elevatorPitchDTO);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, elevatorPitchDTO.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/elevator-pitches/{id}/unlike")
+    public ResponseEntity<Optional<ElevatorPitchDTO>> unlikeElevatorPitch(@PathVariable(value = "id", required = false) final Long id) {
+        log.debug("REST request to unlike ElevatorPitch : {}", id);
+
+        if (!elevatorPitchRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<ElevatorPitchDTO> result = elevatorPitchService.findOne(id);
+        ElevatorPitchDTO elevatorPitchDTO = result.get();
+        elevatorPitchDTO.setLikeNumber(elevatorPitchDTO.getLikeNumber() - 1);
+        elevatorPitchService.update(elevatorPitchDTO);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, elevatorPitchDTO.getId().toString()))
+            .body(result);
     }
 }
