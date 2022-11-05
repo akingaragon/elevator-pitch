@@ -24,7 +24,14 @@
             <span>Home</span>
           </span>
         </b-nav-item>
-        <b-nav-item-dropdown right id="entity-menu" v-if="authenticated" active-class="active" class="pointer" data-cy="entity">
+        <b-nav-item-dropdown
+          right
+          id="entity-menu"
+          v-if="hasAnyAuthority('ROLE_ADMIN') && authenticated"
+          active-class="active"
+          class="pointer"
+          data-cy="entity"
+        >
           <span slot="button-content" class="navbar-dropdown-menu">
             <font-awesome-icon icon="th-list" />
             <span class="no-bold">Entities</span>
@@ -83,7 +90,13 @@
             <font-awesome-icon icon="user" />
             <span class="no-bold"> Account </span>
           </span>
-          <b-dropdown-item data-cy="settings" to="/account/settings" tag="b-dropdown-item" v-if="authenticated" active-class="active">
+          <b-dropdown-item
+            data-cy="settings"
+            to="/account/settings"
+            tag="b-dropdown-item"
+            v-if="hasAnyAuthority('ROLE_ADMIN') && authenticated"
+            active-class="active"
+          >
             <font-awesome-icon icon="wrench" />
             <span>Settings</span>
           </b-dropdown-item>

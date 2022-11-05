@@ -49,6 +49,58 @@
                 Your username can only contain letters and digits.
               </small>
             </div>
+            <label class="form-control-label" for="firstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="$v.registerAccount.firstName.$model"
+              id="firstName"
+              name="firstName"
+              :class="{ valid: !$v.registerAccount.firstName.$invalid, invalid: $v.registerAccount.firstName.$invalid }"
+              required
+              minlength="1"
+              maxlength="50"
+              pattern="^[a-zA-Z0-9!#$&'*+=?^_`{|}~.-]+@?[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+              data-cy="firstName"
+            />
+            <div v-if="$v.registerAccount.firstName.$anyDirty && $v.registerAccount.firstName.$invalid">
+              <small class="form-text text-danger" v-if="!$v.registerAccount.firstName.required"> Your name is required. </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.firstName.minLength">
+                Your name is required to be at least 1 character.
+              </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.firstName.maxLength">
+                Your name cannot be longer than 50 characters.
+              </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.firstName.pattern">
+                Your name can only contain letters.
+              </small>
+            </div>
+            <label class="form-control-label" for="lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="$v.registerAccount.lastName.$model"
+              id="lastName"
+              name="lastName"
+              :class="{ valid: !$v.registerAccount.lastName.$invalid, invalid: $v.registerAccount.lastName.$invalid }"
+              required
+              minlength="1"
+              maxlength="50"
+              pattern="^[a-zA-Z0-9!#$&'*+=?^_`{|}~.-]+@?[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+              data-cy="lastName"
+            />
+            <div v-if="$v.registerAccount.lastName.$anyDirty && $v.registerAccount.lastName.$invalid">
+              <small class="form-text text-danger" v-if="!$v.registerAccount.lastName.required"> Your last name is required. </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.lastName.minLength">
+                Your last name is required to be at least 1 character.
+              </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.lastName.maxLength">
+                Your last name cannot be longer than 50 characters.
+              </small>
+              <small class="form-text text-danger" v-if="!$v.registerAccount.lastName.pattern">
+                Your last name can only contain letters.
+              </small>
+            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" for="email">Email</label>
@@ -131,14 +183,6 @@
           <button type="submit" :disabled="$v.$invalid" class="btn btn-primary" data-cy="submit">Register</button>
         </form>
         <p></p>
-        <div class="alert alert-warning">
-          <span>If you want to </span>
-          <a class="alert-link" v-on:click="openLogin()">sign in</a
-          ><span
-            >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-            password="user").</span
-          >
-        </div>
       </div>
     </div>
   </div>

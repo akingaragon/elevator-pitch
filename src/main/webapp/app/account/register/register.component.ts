@@ -6,8 +6,21 @@ import RegisterService from '@/account/register/register.service';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '@/constants';
 
 const loginPattern = helpers.regex('alpha', /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/);
+const stringPattern = helpers.regex('alpha', /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/);
 const validations: any = {
   registerAccount: {
+    firstName: {
+      required,
+      minLength: minLength(1),
+      maxLength: maxLength(50),
+      pattern: stringPattern,
+    },
+    lastName: {
+      required,
+      minLength: minLength(1),
+      maxLength: maxLength(50),
+      pattern: stringPattern,
+    },
     login: {
       required,
       minLength: minLength(1),
@@ -44,6 +57,8 @@ export default class Register extends Vue {
   @Inject('registerService') private registerService: () => RegisterService;
   @Inject('loginService') private loginService: () => LoginService;
   public registerAccount: any = {
+    firstName: undefined,
+    lastName: undefined,
     login: undefined,
     email: undefined,
     password: undefined,
