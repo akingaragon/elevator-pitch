@@ -4,9 +4,10 @@ buildscript {
     }
     dependencies {
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.4.3'
+        classpath 'org.akhikhl.gretty:gretty:+'
     }
 }
-
 plugins {
     id "java"
     id "maven-publish"
@@ -30,8 +31,8 @@ version = "0.0.1-SNAPSHOT"
 
 description = ""
 
-sourceCompatibility=11
-targetCompatibility=11
+sourceCompatibility = 11
+targetCompatibility = 11
 assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18"
 
 apply from: "gradle/docker.gradle"
@@ -53,6 +54,10 @@ if (project.hasProperty("gae")) {
     apply plugin: 'maven'
     apply plugin: 'org.springframework.boot.experimental.thin-launcher'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+    apply plugin: 'war'
+    apply plugin: 'org.akhikhl.gretty'
+    apply plugin: 'com.google.cloud.tools.appengine'
 
     dependencyManagement {
         imports {
@@ -104,7 +109,6 @@ modernizer {
 }
 
 
-
 check.dependsOn integrationTest
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/tests")
@@ -126,7 +130,7 @@ liquibase {
     activities {
         main {
             driver "com.mysql.cj.jdbc.Driver"
-            url "jdbc:mysql://localhost:3306/ElevatorPitch"
+            url "jdbc:mysql://avnadmin:AVNS__ywd9ue3hOg2f5SuG2I@mysql-2a6ca43d-akingaragon-c9db.aivencloud.com:25723/ElevatorPitch?ssl-mode=REQUIRED&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"
             username "root"
             password ""
             changeLogFile "src/main/resources/config/liquibase/master.xml"
@@ -136,7 +140,7 @@ liquibase {
         }
         diffLog {
             driver "com.mysql.cj.jdbc.Driver"
-            url "jdbc:mysql://localhost:3306/ElevatorPitch"
+            url "jdbc:mysql://avnadmin:AVNS__ywd9ue3hOg2f5SuG2I@mysql-2a6ca43d-akingaragon-c9db.aivencloud.com:25723/ElevatorPitch?ssl-mode=REQUIRED&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true"
             username "root"
             password ""
             changeLogFile project.ext.diffChangelogFile
@@ -197,6 +201,7 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    implementation 'org.apache.maven:maven-plugin-api:3.8.5'
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.testcontainers:testcontainers"
     implementation "org.springdoc:springdoc-openapi-webmvc-core"
@@ -229,11 +234,11 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "io.jsonwebtoken:jjwt-api"
     if (!project.hasProperty("gae")) {
-    runtimeOnly "io.jsonwebtoken:jjwt-impl"
-    runtimeOnly "io.jsonwebtoken:jjwt-jackson"
+        runtimeOnly "io.jsonwebtoken:jjwt-impl"
+        runtimeOnly "io.jsonwebtoken:jjwt-jackson"
     } else {
-    implementation "io.jsonwebtoken:jjwt-impl"
-    implementation "io.jsonwebtoken:jjwt-jackson"
+        implementation "io.jsonwebtoken:jjwt-impl"
+        implementation "io.jsonwebtoken:jjwt-jackson"
     }
     implementation "org.springframework.security:spring-security-data"
     implementation "io.micrometer:micrometer-registry-prometheus"
